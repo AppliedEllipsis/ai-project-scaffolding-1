@@ -1,3 +1,12 @@
+<div align="right">
+  <a href="#" title="Last updated: 2026-02-01" class="status-badge">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">Updating...</span>
+  </a>
+</div>
+
+<script src="status-badge.js"></script>
+
 # Project Scaffolding
 
 A complete scaffolding template for TypeScript projects with AI agent memory system and development tooling.
@@ -350,6 +359,70 @@ When you discover workflows that should be repeated:
 6. **Start coding** in `src/` directory
 
 ---
+
+<style>
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: #1a1a2e;
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.status-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.status-icon {
+  font-size: 16px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.status-text {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+.status-badge .status-text {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+  .status-badge {
+    top: auto;
+    right: auto;
+    left: 20px;
+    bottom: 20px;
+    transform: none;
+  }
+  
+  .status-badge:hover {
+    transform: translateY(0);
+  }
+}
+</style>
 
 ## License
 
