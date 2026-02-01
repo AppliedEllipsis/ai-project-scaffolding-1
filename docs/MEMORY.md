@@ -46,7 +46,7 @@ This file maintains query history and tracks ongoing work across AI agent sessio
 **Context**: Found that `!` is a shell command operator in opencode, so need to use `~` instead. Should have agents.min.md and AGENTS.md always check prompts for updates when user asks to update memory or use update_from_project. Looking for general matching prompts instead of exact matches.
 
 **Outcome**: Completed
-- Updated docs/common_prompts.md with comprehensive prompt reference system documentation
+- Updated docs/common_prompts.md with comprehensive prompt reference system
 - Clarified to use `~` instead of `!` for prompt names (avoid shell conflicts)
 - Updated AGENTS.md Prompt Reference System section with better detection logic
 - Updated agents.min.md to be optimized for prompt detection
@@ -55,6 +55,48 @@ This file maintains query history and tracks ongoing work across AI agent sessio
 - Distinguished prompt references from inline code or comments
 - Added context-aware matching guidelines
 - Updated all documentation to reference docs/common_prompts.md
+
+### [2026-02-01 03:15 UTC] - Query: Update from project best practices (z-ai-monitor)
+
+**Query**: ~update_from_project# D:\_projects\z-ai-monitor
+
+**Context**: Learning from z-ai-monitor project to extract best practices for scaffolding, especially around build automation, testing, and documentation organization.
+
+**Outcome**: Completed
+- Analyzed z-ai-monitor project structure and practices
+- Discovered comprehensive Makefile with build automation (build, test, clean, install, run-cli, run-web, lint, fmt, deps, vet, release)
+- Found cross-platform build support (linux, darwin, windows with amd64 and arm64)
+- Identified version management using `git describe --tags`
+- Documented testing strategy with multiple test scripts and comprehensive reports
+- Found extensive documentation organization (plans/, feature docs, implementation summaries, test reports)
+- Learned project structure patterns: cmd/, pkg/, internal/, tests/, build/ directories
+- Discovered feature documentation pattern: each major feature has dedicated doc file
+- Identified comprehensive project summaries (PROJECT_SUMMARY.md, IMPLEMENTATION_SUMMARY.md)
+- Found deliverables tracking (DELIVERABLES.md)
+- Discovered API query documentation patterns (z_api_query.md, z_ai_keys.md)
+- Learned about platform detection and binary extension handling
+- Found time window calculator and formatter package organization
+- Identified web server internal package structure
+- Documented comprehensive testing reports with verification summaries
+
+**Key Learnings Extracted**:
+1. **Makefile Automation**: Comprehensive targets for all build/development tasks with cross-platform support
+2. **Documentation Organization**: plans/, feature docs, implementation summaries, test reports, deliverables tracking
+3. **Testing Strategy**: Multiple test scripts for different environments, comprehensive test reports
+4. **Project Structure**: cmd/, pkg/, internal/, tests/, build/ directories for Go projects
+5. **Feature Documentation**: Each major feature has dedicated documentation file
+6. **Version Management**: Using `git describe --tags` for version info
+7. **Platform Support**: Automatic detection and cross-platform builds
+
+**Potential Enhancements to Scaffolding**:
+- Add optional Makefile for build automation (like z-ai-monitor)
+- Add plans/ directory for implementation plans
+- Add feature documentation pattern (feature-specific docs)
+- Add comprehensive project summary template
+- Add deliverables tracking (DELIVERABLES.md)
+- Add test report templates (TESTING_REPORT.md, VERIFICATION_TEST_REPORT.md)
+- Add API query documentation templates
+- Add recent changes tracking (RECENT_CHANGES.md)
 
 ---
 

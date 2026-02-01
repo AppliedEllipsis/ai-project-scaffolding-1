@@ -14,6 +14,7 @@ Prompts follow this structure:
 **Important**: Use `~` (tilde) instead of `!` for prompt names to avoid shell command conflicts.
 
 **Placeholder Usage**:
+
 - Use `{placeholder_name}` for dynamic content
 - Replace placeholders with actual values when executing prompts
 - Prompts can have or without a name
@@ -22,18 +23,22 @@ Prompts follow this structure:
 ## Available Prompts
 
 ### #update_from_project#
-look into {path provided} for project memory updates that we might add to best practices, I know it knows rules about gh and pr among other things... enhance yourself based off non-project specific best practices and document and memorize, and implement it.
+
+look into {path provided} for project memory updates that we might add to best practices. enhance yourself based off non-project specific best practices and document and memorize, and implement it. {}
 
 **Use when**:
+
 - Discovering workflows from other projects
 - Learning best practices from existing codebases
 - Extracting reusable patterns
 - Enhancing scaffolding or documentation
 
 **Placeholders**:
+
 - `{path provided}` - Path to project to examine
 
 **Matching Logic**:
+
 - Look for general prompt intent, not exact string match
 - "update memory" patterns match this prompt
 - "update from project" patterns match this prompt
@@ -44,12 +49,14 @@ look into {path provided} for project memory updates that we might add to best p
 ## Adding New Prompts
 
 **When to add**:
+
 - Discover a workflow that would be useful to repeat
 - Learn a new pattern from another project
 - Create a reusable template for common tasks
 - Document best practices that should be standardized
 
 **How to add**:
+
 1. Use `#prompt_name#` format (with `~` not `!`)
 2. Include prompt description with `{placeholders}`
 3. Document when to use the prompt
@@ -57,6 +64,7 @@ look into {path provided} for project memory updates that we might add to best p
 5. Include example usage if helpful
 
 **Prompt Management**:
+
 - Keep prompts focused and reusable
 - Use descriptive names with `~` prefix
 - Document placeholders clearly
@@ -64,6 +72,7 @@ look into {path provided} for project memory updates that we might add to best p
 - Make matching flexible/general, not strict
 
 **Matching Guidelines**:
+
 - Agents should check for ~ patterns that look like prompt requests
 - Distinguish from inline code or comments
 - Look for intent/context, not exact string match
@@ -88,6 +97,7 @@ look into {path provided} for project memory updates that we might add to best p
 **User says**: "Update from z-ai-monitor project"
 
 **Agent action**:
+
 1. Check docs/common_prompts.md for matching prompts
 2. Find #update_from_project# matches (general matching, not exact)
 3. Execute prompt with placeholder: `{path provided}` = `z-ai-monitor`
@@ -96,6 +106,7 @@ look into {path provided} for project memory updates that we might add to best p
 **User says**: "Update memory with what I learned"
 
 **Agent action**:
+
 1. Check for prompt patterns matching "update memory"
 2. If no specific match found, proceed with general memory update
 3. Check docs/common_prompts.md for relevant prompts
@@ -104,6 +115,7 @@ look into {path provided} for project memory updates that we might add to best p
 **User says**: "~update_from_project# D:\_projects\some-project"
 
 **Agent action**:
+
 1. Recognize this as an explicit prompt reference
 2. Parse prompt name and placeholder value
 3. Execute #update_from_project# with `{path provided}` = `D:\_projects\some-project`
