@@ -364,62 +364,87 @@ When you discover workflows that should be repeated:
 .status-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  background: #1a1a2e;
+  gap: 10px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
-  border-radius: 20px;
-  font-size: 14px;
+  border-radius: 25px;
+  font-size: 13px;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   position: fixed;
   top: 20px;
   right: 20px;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .status-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .status-icon {
-  font-size: 16px;
-  animation: spin 1s linear infinite;
+  font-size: 18px;
+  display: inline-block;
+  animation: spin 2s linear infinite;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .status-text {
   font-size: 12px;
-  opacity: 0.9;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  animation: glow 2s ease-in-out infinite alternate;
 }
 
-.status-badge .status-text {
-  animation: pulse 2s ease-in-out infinite;
+@keyframes glow {
+  from { opacity: 0.85; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+  to { opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 0.9; }
-  50% { opacity: 1; }
+.status-badge:active {
+  transform: scale(0.98);
 }
 
-@media (max-width: 600px) {
+/* Pulse effect to catch attention */
+.status-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: ripple 1.5s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% { width: 100%; height: 100%; opacity: 1; }
+  100% { width: 160%; height: 160%; opacity: 0; }
+}
+
+@media (max-width: 768px) {
   .status-badge {
     top: auto;
-    right: auto;
-    left: 20px;
     bottom: 20px;
+    left: 20px;
+    right: 20px;
     transform: none;
   }
   
   .status-badge:hover {
-    transform: translateY(0);
+    transform: scale(1.02);
   }
 }
 </style>
