@@ -475,9 +475,65 @@ look into {path provided} for project memory updates that we might add to best p
 **Integration with Memory System**:
 - Prompt additions should be documented in docs/MEMORY.md
 - Update Quick Reference section with new prompt patterns
-- Reference prompts in AGENTS.md for context
+- Reference prompts in AGENTS.md and agents.min.md for context
 - Share prompt knowledge via docs/memory/shared-memory.md
-- Always check docs/common_prompts.md when user requests updates or learning
+- Always check docs/common_prompts.md when user asks to update memory or learn from projects
+
+---
+
+## Pull Request and Merge Workflow
+
+### Creating Pull Requests
+
+When creating pull requests for branch merges:
+
+**Preparation**:
+1. Ensure all changes are committed and pushed to remote
+2. Review commits that will be included in PR
+3. Check that gh CLI is installed and authenticated
+4. Verify branch is ready to merge (no conflicts, tests passing)
+
+**PR Title Format**:
+- Use user's commit format: `~ [ short up to 8 word summary ]:`
+- Focus on overall changes, not individual commits
+- Example: `~ [ add project discovery and prompt system ]:`
+
+**PR Description Guidelines**:
+- Summarize overall changes (not individual commits)
+- Group related changes together
+- Mention any breaking changes or migration steps
+- Link to relevant issues or documentation
+- Explain impact and reasoning
+
+**Creating PR**:
+Use `gh pr create` command:
+
+```bash
+gh pr create --title "~ [ short up to 8 word summary ]:" --body "PR description here"
+```
+
+**Prompt for Creating PR**:
+- Use `#create_pr#` prompt for systematic PR creation
+- Placeholder: `{pr_description}` - Description of PR being created
+
+### Merging Pull Requests
+
+**Before Merging**:
+1. Review all changes in PR
+2. Ensure CI/CD checks pass
+3. Check that no merge conflicts exist
+4. Verify tests pass on merge
+5. Review breaking changes and migration steps
+
+**Merge Methods**:
+- **Squash and Merge**: Clean history, single commit
+- **Rebase and Merge**: Preserve history, linear progression
+- **Merge Commit**: Preserve all commits, branch point
+
+**Merge Commits**:
+- Use user's commit format for merge commits
+- Example: `~ [ merge feature/branch-name ]:`
+- Document what was merged and why
 
 ---
 

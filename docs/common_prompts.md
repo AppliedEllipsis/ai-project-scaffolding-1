@@ -119,3 +119,39 @@ look into {path provided} for project memory updates that we might add to best p
 1. Recognize this as an explicit prompt reference
 2. Parse prompt name and placeholder value
 3. Execute #update_from_project# with `{path provided}` = `D:\_projects\some-project`
+
+---
+
+### #create_pr#
+Create a pull request to merge current branch into target branch using GitHub CLI.
+
+**Use when**:
+- Needing to create a PR for a feature branch
+- Ready to merge changes into main/master
+- Collaborating with team via code review
+
+**Placeholders**:
+- `{target_branch}` - Target branch to merge into (usually 'main' or 'master')
+- `{pr_description}` - Description of the PR being created
+
+**Instructions**:
+1. Check that gh CLI is installed and authenticated
+2. Ensure all changes are committed and pushed to remote
+3. Review commits that will be included in PR
+4. Focus PR description on overall changes (not individual commits)
+5. Use user's commit format for PR title if specified
+6. Mention any breaking changes or migration steps
+7. Link to relevant issues or documentation
+
+**Example**:
+```bash
+gh pr create --title "✨ feat(scope): description" --body "PR description here"
+```
+
+**Matching Logic**:
+- "create a pr" patterns match this prompt
+- "merge into main" patterns match this prompt
+- "open pull request" patterns match this prompt
+- Context-aware: look for branch and target information
+
+---
