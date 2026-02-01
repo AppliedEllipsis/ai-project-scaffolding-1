@@ -4,8 +4,8 @@
 class ProjectStatusBadge {
   constructor() {
     this.badge = document.getElementById('status-badge');
-    this.icon = this.badge.querySelector('.status-icon');
-    this.text = this.badge.querySelector('.status-text');
+    this.icon = this.badge ? this.badge.querySelector('.status-icon') : null;
+    this.text = this.badge ? this.badge.querySelector('.status-text') : null;
     this.currentState = 'idle';
     this.updateInterval = null;
     
@@ -20,6 +20,8 @@ class ProjectStatusBadge {
   }
   
   init() {
+    if (!this.badge) return;
+    
     // Check for existing state in localStorage
     const savedState = localStorage.getItem('project-status');
     if (savedState && savedState !== 'idle') {
@@ -31,39 +33,38 @@ class ProjectStatusBadge {
   }
   
   setState(state) {
-    if (this.states[state]) {
-      this.currentState = state;
-      
-      // Update icon and text
-      this.icon.textContent = this.states[state].icon;
-      this.text.textContent = this.states[state].text;
-      
-      // Update animation
-      this.updateAnimation(state);
-      
-      // Save to localStorage
-      localStorage.setItem('project-status', state);
-      
-      // Clear any existing timeouts
-      if (this.updateInterval) {
-        clearInterval(this.updateInterval);
-        this.updateInterval = null;
-      }
+    if (!this.badge || !this.states[state]) {
+      return;
+    }
+    
+    this.currentState = state;
+    
+    // Update icon and text
+    this.icon.textContent = this.states[state].icon;
+    this.text.textContent = this.states[state].text;
+    
+    // Update animation
+    this.updateAnimation(state);
+    
+    // Save to localStorage
+    localStorage.setItem('project-status', state);
+    
+    // Clear any existing timeouts
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval);
+      this.updateInterval = null;
     }
   }
   
   updateAnimation(state) {
+    if (!this.badge) return;
+    
     // Remove existing animation classes
     this.badge.classList.remove('pulse', 'static');
-    this.icon.classList.remove('fa-spin');
     
     if (this.states[state].animation === 'pulse') {
       this.badge.classList.add('pulse');
       this.badge.style.animation = 'pulse 2s ease-in-out infinite';
-      
-      if (this.updateInterval) {
-        clearInterval(this.updateInterval);
-      }
       
       // Set interval for pulse effect
       let pulses = 0;
@@ -71,44 +72,66 @@ class ProjectStatusBadge {
         pulses++;
         if (pulses > 6) {
           this.badge.style.animation = 'none';
+          clearInterval(this.updateInterval);
+          this.updateInterval = null;
         }
       }, 1000);
+    } else {
+      this.badge.style.animation = 'none';
     }
   }
   
-  setProcessing(message = {
+  setProcessing(message = 'Processing...') {
     this.setState('processing');
-    this.text.textContent = message || 'Processing...';
+    if (this.text) {
+      this.text.textContent = message;
+    }
   }
   
   setUpdating() {
     this.setState('updating');
-    this.text.textContent = 'Updating...';
+    if (this.text) {
+      this.text.textContent = 'Updating...';
+    }
   }
   
   setIdle() {
     this.setState('idle');
-    this.text.textContent = 'Idle';
+    if (this.text) {
+      this.text.textContent = 'Idle';
+    }
   }
   
   // Auto-hide when not needed
   hide() {
-    this.badge.style.display = 'none';
+    if (this.badge) {
+      this.badge.style.display = 'none';
+    }
   }
   
   show() {
-    this.badge.style.display = 'inline-flex';
+    if (this.badge) {
+      this.badge.style.display = 'inline-flex';
+    }
   }
 }
 
 // Initialize when DOM is ready
-if (document.readyState === 'loading' || document.readyState === 'interactive') {
-  window.projectStatusBadge = new ProjectStatusBadge();
+const initBadge = () => {
+  if (!window.projectStatusBadge) {
+    window.projectStatusBadge = new ProjectStatusBadge();
+  }
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBadge);
+} else {
+  initBadge();
 }
 
 // Export for external control
 window.projectBadge = {
-  setProcessing: () => window.projectStatusBadge?.setProcessing(),
+  setProcessing: (message) => window.projectStatusBadge?.setProcessing(message),
   setUpdating: () => window.projectStatusBadge?.setUpdating(),
   setIdle: () => window.projectStatusBadge?.setIdle(),
   hide: () => window.projectStatusBadge?.hide(),
