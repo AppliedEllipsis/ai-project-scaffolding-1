@@ -98,39 +98,53 @@ This file maintains query history and tracks ongoing work across AI agent sessio
 - Add API query documentation templates
 - Add recent changes tracking (RECENT_CHANGES.md)
 
+### [2026-02-01 03:30 UTC] - Query: Add PR creation guidance and workflow
+
+**Query**: create a pr to merge it, but when you create pr's use my commit format, that should be added to memory also as it's an important format for pr's and commits and similar things that have comments or notes, but do it for the overall pr difference or merges since branches or forks. update your memory and docs about that. note you have access to gh command for creating own pr's. think everything out and update docs before creating pr, and make the commits of current before as well
+
+**Context**: User wants PR created using their commit message format for the title. This is an important pattern to document. Also mentions gh CLI access for creating PRs. Need to document PR/merge workflows, commit format importance, and update all documentation.
+
+**Outcome**: Completed
+- Updated docs/common_prompts.md with #create_pr# prompt
+- Added comprehensive PR and merge workflow guidance to AGENTS.md
+- Updated docs/MEMORY.md with this query entry
+- Documented PR creation process using gh CLI
+- Emphasized overall PR focus (not individual commits)
+- Documented merge methods and commit formats
+- Added examples and best practices
+
 ---
 
 ## Current Focus
 
-### Last Query
+### Last Query: Add PR creation guidance and workflow
 
-**Query**: Finalize project scaffolding
-**Time**: 2026-01-31 01:00 UTC
-**Summary**: Project scaffolding complete with README and comprehensive documentation
+**Time**: 2026-02-01 03:30 UTC
+**Summary**: Documented PR creation workflow using user's commit format for PR titles, overall PR focus vs individual commits, and gh CLI access
 
 ### Context
 
-All project scaffolding is complete and ready for use as a template for new projects. All essential files are in place:
-
-- Git repository initialized with enhanced conventional commit format
-- TypeScript, ESLint, commitlint configured
-- Memory system fully documented
-- Development guidelines written (AGENTS.md and agents.min.md)
-- Comprehensive README.md added
-- Environment variables template provided
-- All project-specific content removed from source project
+User wants PR created using their commit format: `~ [ short up to 8 word summary ]:`. This is an important pattern for PRs and commits. Need to:
+- Focus on overall PR difference (not individual commits)
+- Document gh CLI access for creating PRs
+- Update memory with PR format and workflow guidance
+- Think through everything before creating PR
+- Make commits of current state before PR creation
 
 ### Planning
 
-Project is now ready for:
-1. Use as template for new projects
-2. Add new project-specific code in `src/` directory
-3. Update package.json with new project name
-4. Create project-specific configuration
+1. Document PR format importance in memory
+2. Add PR creation workflow documentation
+3. Create comprehensive PR for merging feature/gh-ai-notes into main
+4. Focus PR description on overall changes, not individual commits
+5. Summarize all 4 commits: prompt system refinements, z-ai-monitor learnings, PR creation guidance
+6. Use gh CLI to create PR with proper format
 
 ### Remaining Items
 
-- [ ] None - scaffolding is complete
+- [ ] Create PR for feature/gh-ai-notes → main
+- [ ] Verify PR title follows user's commit format
+- [ ] Test PR creation workflow
 
 ---
 
@@ -146,7 +160,7 @@ No sub-tasks pending.
 
 | File | Purpose |
 |------|---------|
-| [`agents.min.md`](agents.min.md) | Optimized quick-start guide (read first) |
+ | [`agents.min.md`](agents.min.md) | Optimized quick-start guide (read first) |
 | [`AGENTS.md`](AGENTS.md) | Full development guide |
 | [`docs/memory/shared-memory.md`](docs/memory/shared-memory.md) | Cross-tool context and tasks |
 | [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) | AI tool registry |
