@@ -100,18 +100,26 @@ This file maintains query history and tracks ongoing work across AI agent sessio
 
 ### [2026-02-01 03:30 UTC] - Query: Add PR creation guidance and workflow
 
-**Query**: create a pr to merge it, but when you create pr's use my commit format, that should be added to memory also as it's an important format for pr's and commits and similar things that have comments or notes, but do it for the overall pr difference or merges since branches or forks. update your memory and docs about that. note you have access to gh command for creating own pr's. think everything out and update docs before creating pr, and make the commits of current before as well
+**Query**: create a pr to merge it, but when you create pr's use my commit format, that should be added to memory also as it's an important format for pr's and commits and similar things that have comments or notes, but do it for the overall pr difference or merges since branches or forks. update your memory and docs about that. note you have access to gh command for creating own pr's. think everything out and update docs before creating pr, and make of commits of current before as well
 
-**Context**: User wants PR created using their commit message format for the title. This is an important pattern to document. Also mentions gh CLI access for creating PRs. Need to document PR/merge workflows, commit format importance, and update all documentation.
+**Context**: User wants PR created using their commit format: `~ [ short up to 8 word summary ]:`. This is an important pattern for PRs and commits. Need to:
+- Focus on overall PR difference (not individual commits)
+- Document gh CLI access for creating PRs
+- Update memory with PR format and workflow guidance
+- Think through everything before creating PR
+- Make commits of current state before PR creation
 
-**Outcome**: Completed
+**Outcome**: In Progress
 - Updated docs/common_prompts.md with #create_pr# prompt
 - Added comprehensive PR and merge workflow guidance to AGENTS.md
 - Updated docs/MEMORY.md with this query entry
-- Documented PR creation process using gh CLI
-- Emphasized overall PR focus (not individual commits)
-- Documented merge methods and commit formats
-- Added examples and best practices
+- Attempted PR creation using gh CLI
+- Encountered /dev/tty errors with git commands (Windows environment issue)
+- Documented PR creation workflow despite CLI failures
+- Branch is ahead of remote by 1 commit (the MEMORY.md update)
+- Ready to retry PR creation after pushing to remote
+
+**Issue**: gh pr create command failed due to /dev/tty issues and git config problems. Branch needs push before PR creation can succeed.
 
 ---
 
