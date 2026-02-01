@@ -12,7 +12,11 @@
     "lint:fix": "eslint src --ext ts --fix",
     "test": "node --test",
     "prepare": "husky install",
-    "buildrelease": "npm version patch && npm run compile"
+    "buildrelease": "npm run update-changelog && npm run update-memory && npm version patch && git push && git push --tags && npm run compile && npm run package && node scripts/move-to-releases.js",
+    "update-changelog": "node scripts/update-changelog-for-release.js",
+    "update-memory": "node scripts/update-memory-for-release.js",
+    "package": "npm pack",
+    "move-to-releases": "node scripts/move-to-releases.js"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

@@ -50,6 +50,34 @@ npm run watch
 npm run buildrelease
 ```
 
+### Release Workflow
+
+**Full release process** (10 automated steps):
+
+```bash
+npm run buildrelease
+```
+
+**What it does**:
+1. Updates CHANGELOG.md (moves "Unreleased" to version header)
+2. Commits CHANGELOG
+3. Updates docs/MEMORY.md with release summary
+4. Commits memory update
+5. Bumps version (npm version patch)
+6. Creates git tag
+7. Pushes commits and tags
+8. Compiles TypeScript
+9. Creates package tarball
+10. Moves package to releases/ directory
+
+**Pre-release checklist**:
+1. Update CHANGELOG.md "Unreleased" section with proper categorization
+2. Ensure working tree is clean
+3. Run `npm run test` → `npm run compile` → `npm run lint`
+4. Update README.md if user-facing changes
+
+**See [AGENTS.md → Release and Changelog Workflow](AGENTS.md#release-and-changelog-workflow) for details.
+
 ---
 
 ## Environment Setup

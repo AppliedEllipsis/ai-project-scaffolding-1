@@ -8,6 +8,7 @@ This guide provides comprehensive instructions for AI agents working on projects
   - [Overview](#overview)
   - [When to Update MEMORY.md](#when-to-update-memorymd)
   - [Query Documentation Guidelines](#query-documentation-guidelines)
+  - [Release and Changelog Workflow](#release-and-changelog-workflow)
 - [Incremental Development Approach](#incremental-development-approach)
 - [Documentation Practices](#documentation-practices)
 - [Coding Practices](#coding-practices)
@@ -147,6 +148,179 @@ Add items to Quick Reference when:
 - New files are created that are frequently referenced
 - New commands are used often
 - Configuration or architecture patterns emerge
+
+### Release and Changelog Workflow
+
+The project uses an automated release workflow with Keep a Changelog format and semantic versioning.
+
+**Key Files**:
+- [`CHANGELOG.md`](CHANGELOG.md) - Released changes and version history
+- [`scripts/update-changelog-for-release.js`](scripts/update-changelog-for-release.js) - Automated changelog updater
+- [`scripts/update-memory-for-release.js`](scripts/update-memory-for-release.js) - Automated memory updater
+- [`scripts/move-to-releases.js`](scripts/move-to-releases.js) - Package mover to releases directory
+
+**Release Workflow** (10-step automated process):
+
+1. **Update CHANGELOG**: Moves "Unreleased" section to version header with today's date
+2. **Commit CHANGELOG**: Creates a git commit for the CHANGELOG update
+3. **Update memory**: Runs memory update script to document the release
+4. **Commit memory**: Creates a git commit for the memory update
+5. **Bump version**: Runs `npm version patch` to increment the patch version
+6. **Create git tag**: Tags the version commit with the version number
+7. **Push to remote**: Pushes commits and tags to the remote repository
+8. **Compile TypeScript**: Builds the project
+9. **Package extension**: Creates the package tarball
+10. **Move to releases**: Moves the package to the releases/ directory
+
+**Running the Release Workflow**:
+
+```bash
+npm run buildrelease
+```
+
+**Pre-Release Requirements**:
+
+Before running the release workflow:
+
+1. **Update CHANGELOG.md**: Add all changes to the "Unreleased" section with proper categorization (Added, Changed, Fixed, Removed, Documentation)
+   - Use "Nothing yet" placeholder if there are no changes
+2. **Ensure working tree is clean**: All changes should be committed or stashed
+3. **Verify tests pass**: `npm run test`
+4. **Verify compilation**: `npm run compile`
+5. **Verify linting**: `npm run lint`
+6. **Update user-facing documentation**: Update README.md if user-facing changes were made
+
+**CHANGELOG Structure**:
+
+Follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) format:
+
+- **Unreleased**: Upcoming changes (use "Nothing yet" placeholder)
+- **[Version] - YYYY-MM-DD**: Released version with date
+  - **Added**: New features
+  - **Changed**: Changes in existing functionality
+  - **Deprecated**: Soon-to-be removed features
+  - **Removed**: Removed features
+  - **Fixed**: Bug fixes
+  - **Security**: Security updates
+  - **Documentation**: Documentation changes
+
+**Version Numbering**:
+
+Uses standard SemVer (X.Y.Z) format for compatibility with package registries.
+
+**Automatic Change Categorization**:
+
+The memory update script automatically categorizes changes:
+- Source files (src/*)
+- Documentation files (docs/*, README.md, CHANGELOG.md)
+- Test files (test/*)
+- Configuration files (package.json, .vscodeignore)
+- Script files (scripts/*)
+
+This generates factual change notes like:
+- "2 source files modified, 1 doc file updated, 1 test file modified"
+
+**Releases Directory**:
+
+The releases/ directory contains versioned artifacts:
+- Package tarballs (.tgz files)
+- Change notes (.tgz.md files)
+- Organized by version number for easy access
+
+**Change Notes Documentation**:
+
+The memory update script analyzes:
+- Git commits since last release
+- Changed files categorized by type
+- Commit counts and file counts
+- File types modified
+
+This provides factual documentation of what changed in each release.
+
+---
+
+## Quick Reference
+
+### Release and Changelog
+
+**Key Files**:
+- [`CHANGELOG.md`](CHANGELOG.md) - Released changes and version history
+- [`scripts/update-changelog-for-release.js`](scripts/update-changelog-for-release.js) - Automated changelog updater
+- [`scripts/update-memory-for-release.js`](scripts/update-memory-for-release.js) - Automated memory updater
+
+**Release Workflow**:
+```bash
+npm run buildrelease  # 10-step automated release process
+```
+
+**Pre-release checklist**:
+1. Update CHANGELOG.md "Unreleased" section
+2. Ensure working tree clean
+3. Run `npm run test` → `npm run compile` → `npm run lint`
+4. Update README.md if needed
+5. Run `npm run buildrelease`
+
+**CHANGELOG sections**:
+- **Added** - New features
+- **Changed** - Changes in existing functionality
+- **Fixed** - Bug fixes
+- **Removed** - Removed features
+- **Deprecated** - Soon-to-be removed features
+- **Security** - Security updates
+- **Documentation** - Documentation changes
+
+**Releases directory**:
+- Contains versioned artifacts (.tgz files)
+- Created automatically by buildrelease workflow
+- Organized by version number
+
+### Development Commands
+
+```bash
+npm run compile     # Compile TypeScript
+npm run watch       # Watch mode for development
+npm run lint        # Run linter
+npm run lint:fix    # Fix linting issues
+npm run test        # Run tests
+npm run pretest     # Compile + lint + test
+npm run buildrelease # Full release workflow
+```
+
+### Memory System
+
+**Read order**:
+1. `agents.min.md` - Quick start guide
+2. `docs/memory/shared-memory.md` - Cross-tool context
+3. `docs/MEMORY.md` - Query history
+4. `docs/memory/tool-registry.md` - Tool info
+
+**Update when**:
+- Starting new query session
+- Completing work
+- Learning new information
+- Making architectural decisions
+
+### Common Workflow
+
+**Before starting any task**:
+1. Read AGENTS.md sections relevant to work
+2. Read docs/MEMORY.md for current focus
+3. Read docs/memory/shared-memory.md for context
+4. Identify task type (narrative vs assigned)
+5. Report context to user
+
+**During task execution**:
+1. Read files in chunks (max 500 lines)
+2. Document decisions in code comments
+3. Update docs/memory/shared-memory.md with context
+4. Consider impact on future tasks
+
+**After completing task**:
+1. Update docs/memory/shared-memory.md
+2. Update docs/MEMORY.md Query History
+3. Mark completed sub-tasks
+4. Document new patterns
+5. Report completion
 
 ---
 

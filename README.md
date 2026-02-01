@@ -48,6 +48,7 @@ npm run watch
 ├── .gitignore            # Standard git exclusions
 ├── AGENTS.md             # Full AI agent development guide
 ├── agents.min.md         # Quick-start guide (read this first!)
+├── CHANGELOG.md          # Released changes and version history
 ├── commitlint.config.mjs # Commit message linting configuration
 ├── docs/
 │   ├── MEMORY.md         # Query history and task tracking
@@ -58,6 +59,8 @@ npm run watch
 │       └── tool-registry.md          # AI tool registry
 ├── eslint.config.mjs      # ESLint configuration
 ├── package.json          # NPM scripts and dependencies
+├── releases/             # Versioned packages (.tgz files)
+├── scripts/              # Automation scripts
 ├── src/                  # TypeScript source files
 │   └── .gitkeep          # Marker file (remove when adding source code)
 └── tsconfig.json         # TypeScript configuration
@@ -147,7 +150,48 @@ git commit -m "~ [ add user authentication ]:
 | `npm run lint:fix` | Auto-fix ESLint issues |
 | `npm run test` | Run test suite |
 | `npm run pretest` | Compile + lint + test (pre-commit) |
-| `npm run buildrelease` | Version bump + compile |
+| `npm run buildrelease` | Full release workflow (10-step) |
+| `npm run update-changelog` | Automated CHANGELOG update |
+| `npm run update-memory` | Automated memory update for release |
+| `npm run package` | Create package tarball |
+| `npm run move-to-releases` | Move package to releases/ directory |
+
+### Release Workflow
+
+Automated release process with Keep a Changelog format:
+
+```bash
+npm run buildrelease
+```
+
+**10-step automated process**:
+1. Update CHANGELOG.md (moves "Unreleased" to version header)
+2. Commit CHANGELOG
+3. Update docs/MEMORY.md with release summary
+4. Commit memory update
+5. Bump version (npm version patch)
+6. Create git tag
+7. Push commits and tags
+8. Compile TypeScript
+9. Create package tarball
+10. Move package to releases/ directory
+
+**Pre-release checklist**:
+1. Update CHANGELOG.md "Unreleased" section with proper categorization
+2. Ensure working tree is clean
+3. Run `npm run test` → `npm run compile` → `npm run lint`
+4. Update README.md if user-facing changes
+
+**CHANGELOG sections**:
+- **Added** - New features
+- **Changed** - Changes in existing functionality
+- **Fixed** - Bug fixes
+- **Removed** - Removed features
+- **Deprecated** - Soon-to-be removed features
+- **Security** - Security updates
+- **Documentation** - Documentation changes
+
+**See [AGENTS.md → Release and Changelog Workflow](AGENTS.md#release-and-changelog-workflow) for detailed documentation.
 
 ---
 
@@ -256,6 +300,7 @@ See [`agents.min.md`](agents.min.md) for complete documentation.
 - **[`docs/memory/shared-memory.md`](docs/memory/shared-memory.md)** - Memory pool
 - **[`docs/memory/tool-registry.md`](docs/memory/tool-registry.md)** - Tool registry
 - **[`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md)** - Commit format
+- **[`CHANGELOG.md`](CHANGELOG.md)** - Released changes and version history
 
 ---
 
