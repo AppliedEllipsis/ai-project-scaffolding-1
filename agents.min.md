@@ -7,8 +7,9 @@
 1. **Read [agents.min.md](agents.min.md)** ← You are here (this file)
 2. **Read [docs/memory/shared-memory.md](docs/memory/shared-memory.md)** - Cross-tool context and pending tasks
 3. **Read [docs/MEMORY.md](docs/MEMORY.md)** - Query history and current focus
-4. **Identify your tool** in [docs/memory/tool-registry.md](docs/memory/tool-registry.md)
-5. **Report to user** with context summary and task queue
+4. **Read [docs/common_prompts.md](docs/common_prompts.md)** - Prompt reference system and reusable templates
+5. **Identify your tool** in [docs/memory/tool-registry.md](docs/memory/tool-registry.md)
+6. **Report to user** with context summary and task queue
 
 ---
 
@@ -20,6 +21,7 @@
 | [`AGENTS.md`](AGENTS.md) | Full development guide (read when needed) | 🟡 Reference |
 | [`docs/memory/shared-memory.md`](docs/memory/shared-memory.md) | Cross-tool context & tasks | 🔴 Must read |
 | [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) | AI tool registry | 🔴 Must read |
+| [`docs/common_prompts.md`](docs/common_prompts.md) | Prompt reference system | 🔴 Must read |
 | [`docs/MEMORY.md`](docs/MEMORY.md) | Query history & current focus | 🟡 Read after |
 | [`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md) | Commit message format | 🟡 Reference |
 
@@ -334,11 +336,80 @@ Read [`AGENTS.md`](AGENTS.md) for detailed information about:
 - Code organization principles
 - Error handling patterns
 - Performance considerations
+- Project discovery and learning methods
+- Prompt reference system usage
 
 Read [`docs/memory/`](docs/memory/) for:
 - Tool registry and capabilities
 - Shared memory system architecture
 - Integration guidelines
+- Prompt reference system patterns
+
+---
+
+## Project Discovery
+
+When working with other projects or learning best practices:
+
+### Reading Other Projects
+
+1. **Initial Scan**:
+   - List project directory structure
+   - Identify documentation files
+   - Find memory systems and agent guides
+   - Locate configuration files
+
+2. **Documentation Reading**:
+   - Read agent guides first
+   - Read memory files
+   - Review README.md
+   - Check CHANGELOG.md for release practices
+
+3. **Best Practice Extraction**:
+   - Identify unique workflows
+   - Note tool configurations
+   - Document release practices
+   - Extract testing strategies
+
+4. **Filtering for Scaffolding**:
+   - Remove project-specific details
+   - Keep universal best practices
+   - Adapt patterns to generic use
+
+### Prompt Reference System
+
+The `docs/common_prompts.md` file provides reusable prompt patterns:
+
+- Consistent prompt usage across sessions
+- Quick access to common workflows
+- Extensible prompt library (updated manually or by AI)
+- Use `{placeholder_name}` for dynamic content
+- Add `~name` prefix for named templates (not `!` - it's a shell operator)
+
+**Important**: Always check docs/common_prompts.md when user:
+- Asks to "update memory" or "learn from project"
+- Uses patterns like "~update_from_project#" or similar
+- Requests updates or learning from other projects
+
+**Detection Logic**:
+- Look for ~ patterns that look like prompt requests (not inline code or comments)
+- Distinguish from user's shell commands (e.g., in opencode)
+- General matching based on intent, not exact strings
+- "update" + "memory/project" matches #update_from_project#
+- Context-aware matching considering user's tool and request
+
+**Example**:
+```markdown
+#update_from_project#
+look into {path provided} for project memory updates...
+```
+
+**When to add prompts**:
+- Discover a workflow to repeat
+- Learn a new pattern from other projects
+- Create a reusable template for common tasks
+- Always use `~` not `!` for prompt names
+- Document matching guidelines (when/how the prompt is detected)
 
 ---
 
@@ -368,6 +439,7 @@ Mark tasks as you complete them in docs/MEMORY.md:
 - [ ] Read agents.min.md ← You're here!
 - [ ] Read docs/memory/shared-memory.md
 - [ ] Read docs/memory/tool-registry.md
+- [ ] Read docs/common_prompts.md
 - [ ] Check docs/MEMORY.md for pending tasks
 - [ ] Understand git commit format
 - [ ] Set up .env file with test keys
@@ -381,6 +453,7 @@ Mark tasks as you complete them in docs/MEMORY.md:
 - **Tool info**: See [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md)
 - **Full guide**: See [`AGENTS.md`](AGENTS.md)
 - **Shared memory**: See [`docs/memory/shared-memory.md`](docs/memory/shared-memory.md)
+- **Prompt reference**: See [`docs/common_prompts.md`](docs/common_prompts.md)
 
 ---
 

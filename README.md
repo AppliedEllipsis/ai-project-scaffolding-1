@@ -1,3 +1,12 @@
+<div align="right">
+  <a href="#" title="Last updated: 2026-02-01" class="status-badge">
+    <span class="status-icon">🔄</span>
+    <span class="status-text">Updating...</span>
+  </a>
+</div>
+
+<script src="status-badge.js"></script>
+
 # Project Scaffolding
 
 A complete scaffolding template for TypeScript projects with AI agent memory system and development tooling.
@@ -52,6 +61,7 @@ npm run watch
 ├── commitlint.config.mjs # Commit message linting configuration
 ├── docs/
 │   ├── MEMORY.md         # Query history and task tracking
+│   ├── common_prompts.md  # Prompt reference system and reusable templates
 │   └── memory/
 │       ├── README.md                 # Shared memory system documentation
 │       ├── git_commit_format.md      # Git commit message format
@@ -300,7 +310,42 @@ See [`agents.min.md`](agents.min.md) for complete documentation.
 - **[`docs/memory/shared-memory.md`](docs/memory/shared-memory.md)** - Memory pool
 - **[`docs/memory/tool-registry.md`](docs/memory/tool-registry.md)** - Tool registry
 - **[`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md)** - Commit format
+- **[`docs/common_prompts.md`](docs/common_prompts.md)** - Prompt reference system and reusable templates
 - **[`CHANGELOG.md`](CHANGELOG.md)** - Released changes and version history
+
+---
+
+## Project Discovery and Learning
+
+The scaffolding includes a **prompt reference system** for learning from other projects:
+
+### Reading Other Projects
+
+When discovering and learning from other projects:
+
+1. **Initial Scan**: List project directory structure, identify documentation files
+2. **Documentation Reading**: Read agent guides, memory files, README.md, CHANGELOG.md
+3. **Best Practice Extraction**: Identify unique workflows, tool configurations, release practices
+4. **Filtering for Scaffolding**: Remove project-specific details, keep universal best practices
+
+### Prompt Reference System
+
+The `docs/common_prompts.md` file provides:
+
+- Reusable prompt patterns for consistent workflows
+- Quick access to common project discovery tasks
+- Extensible library (updated manually or by AI agents)
+
+**Example prompt**:
+```markdown
+#update_from_project#
+look into {path provided} for project memory updates...
+```
+
+When you discover workflows that should be repeated:
+- Add new prompt patterns to `docs/common_prompts.md`
+- Include `{placeholder_name}` for dynamic content
+- Use `!name` prefix for named templates
 
 ---
 
@@ -314,6 +359,95 @@ See [`agents.min.md`](agents.min.md) for complete documentation.
 6. **Start coding** in `src/` directory
 
 ---
+
+<style>
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  border-radius: 25px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-badge:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.6);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.status-icon {
+  font-size: 18px;
+  display: inline-block;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.status-text {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { opacity: 0.85; text-shadow: 0 0 5px rgba(255, 255, 255, 0.2); }
+  to { opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.5); }
+}
+
+.status-badge:active {
+  transform: scale(0.98);
+}
+
+/* Pulse effect to catch attention */
+.status-badge::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 25px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  animation: ripple 1.5s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% { width: 100%; height: 100%; opacity: 1; }
+  100% { width: 160%; height: 160%; opacity: 0; }
+}
+
+@media (max-width: 768px) {
+  .status-badge {
+    top: auto;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    transform: none;
+  }
+  
+  .status-badge:hover {
+    transform: scale(1.02);
+  }
+}
+</style>
 
 ## License
 

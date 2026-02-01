@@ -9,6 +9,9 @@ This guide provides comprehensive instructions for AI agents working on projects
   - [When to Update MEMORY.md](#when-to-update-memorymd)
   - [Query Documentation Guidelines](#query-documentation-guidelines)
   - [Release and Changelog Workflow](#release-and-changelog-workflow)
+- [Project Discovery and Learning](#project-discovery-and-learning)
+  - [Reading Other Projects](#reading-other-projects)
+  - [Prompt Reference System](#prompt-reference-system)
 - [Incremental Development Approach](#incremental-development-approach)
 - [Documentation Practices](#documentation-practices)
 - [Coding Practices](#coding-practices)
@@ -293,6 +296,7 @@ npm run buildrelease # Full release workflow
 2. `docs/memory/shared-memory.md` - Cross-tool context
 3. `docs/MEMORY.md` - Query history
 4. `docs/memory/tool-registry.md` - Tool info
+5. `docs/common_prompts.md` - Prompt reference system
 
 **Update when**:
 - Starting new query session
@@ -321,6 +325,215 @@ npm run buildrelease # Full release workflow
 3. Mark completed sub-tasks
 4. Document new patterns
 5. Report completion
+
+---
+
+## Project Discovery and Learning
+
+### Reading Other Projects
+
+When discovering and learning from other projects:
+
+**Purpose**:
+- Extract best practices from existing projects
+- Learn new workflows and methodologies
+- Improve the scaffolding template
+- Enhance development standards
+
+**Discovery Process**:
+
+1. **Initial Scan**:
+   - List project directory structure
+   - Identify documentation files (`*.md`, `docs/`, `plans/`)
+   - Find memory systems and agent guides
+   - Locate configuration files (package.json, .vscodeignore, etc.)
+
+2. **Documentation Reading Strategy**:
+   - Read agent guides first (AGENTS.md, agents.min.md)
+   - Read memory files to understand project context
+   - Review README.md for project overview
+   - Check for CHANGELOG.md and release practices
+   - Examine scripts/ for automation patterns
+
+3. **Best Practice Extraction**:
+   - Identify unique workflows or processes
+   - Note tool configurations and patterns
+   - Document release and deployment practices
+   - Extract testing and quality assurance methods
+   - Learn documentation organization standards
+
+4. **Filtering for Scaffolding**:
+   - Remove project-specific details
+   - Keep universal best practices
+   - Adapt patterns to generic use
+   - Document rationale for inclusion
+
+**Key Areas to Examine**:
+- Memory system implementations
+- Release workflows and automation
+- Git practices and commit formats
+- Documentation structure
+- Configuration management
+- Testing strategies
+- Security practices
+
+### Prompt Reference System
+
+**Purpose**:
+The [`docs/common_prompts.md`](docs/common_prompts.md) file provides a centralized repository of reusable prompt patterns and templates. This system allows:
+- Consistent prompt usage across sessions
+- Quick access to common workflows
+- Knowledge of available prompts for future reference
+- Extensible prompt library (updated manually or by AI)
+
+**Prompt Format**:
+
+Prompts in `docs/common_prompts.md` follow this structure:
+
+```markdown
+#prompt_name#
+{prompt description with placeholders}
+```
+
+**Placeholder Usage**:
+- Use `{placeholder_name}` for dynamic content
+- Prompts with `~name` should be treated as named templates
+- Replace placeholders with actual values when executing prompts
+- **Important**: Use `~` (tilde) instead of `!` for prompt names
+- `!` is a shell command operator in some tools (e.g., opencode)
+- This prevents conflicts with shell commands and comments
+
+**Reading Prompts**:
+
+1. **During Onboarding**:
+   - Read `docs/common_prompts.md` as part of initial context loading
+   - Store available prompt patterns in working memory
+   - Reference prompts when encountering matching scenarios
+
+2. **When Appropriate**:
+   - Check docs/common_prompts.md for general prompt matches
+   - Look for intent/context, not exact string matches
+   - Use fuzzy matching to find relevant prompts
+   - Distinguish from inline code or comments
+   - Apply prompt patterns to consistent workflows
+   - Reference named prompts for complex tasks
+
+3. **Prompt Detection Logic**:
+   - Check for `~` patterns that look like prompt requests (not inline code or comments)
+   - Distinguish between user's shell commands and prompt references
+   - Match based on intent: "update memory", "update from project", etc.
+   - Consider context and tool when matching
+   - If no specific match found, proceed with standard workflow
+   - Always check for ~ patterns when user asks to update memory or learn from projects
+
+**Updating Prompts**:
+
+**Manual Updates**:
+- Add new prompt patterns as you discover useful workflows
+- Document prompts that work well for specific tasks
+- Include placeholders for dynamic content
+- Add `~name` prefix for named prompts (not `!` to avoid shell conflicts)
+- Document when to use and matching logic
+- Make matching flexible/general, not strict/exact
+
+**AI-Agent Updates**:
+- AI agents can add new prompts based on learned patterns
+- Document successful workflows as reusable prompts
+- Include context and usage examples
+- Maintain clear naming conventions
+- Update matching guidelines as you learn
+
+**Important Note**:
+- Always use `~` instead of `!` for prompt names
+- `!` is a shell command operator in some tools (e.g., opencode)
+- This prevents conflicts with shell commands and comments
+- Agents should always check docs/common_prompts.md for prompt requests
+- Look for general matching, not necessarily exact string matches
+- Distinguish prompt references from code comments or inline explanations
+
+**Example Prompts**:
+
+```markdown
+#update_from_project#
+look into {path provided} for project memory updates that we might add to best practices, I know it knows rules about gh and pr among other things... enhance yourself based off non-project specific best practices and document and memorize, and implement it.
+```
+
+**When to Add Prompts**:
+- Discover a workflow that would be useful to repeat
+- Learn a new pattern from another project
+- Create a reusable template for common tasks
+- Document best practices that should be standardized
+
+**Prompt Management**:
+- Read `docs/common_prompts.md` during onboarding
+- Keep prompts focused and reusable
+- Use descriptive names with `~` prefix
+- Document placeholders clearly
+- Update prompts based on feedback and usage
+- Make matching flexible/general, not strict/exact
+
+**Integration with Memory System**:
+- Prompt additions should be documented in docs/MEMORY.md
+- Update Quick Reference section with new prompt patterns
+- Reference prompts in AGENTS.md and agents.min.md for context
+- Share prompt knowledge via docs/memory/shared-memory.md
+- Always check docs/common_prompts.md when user asks to update memory or learn from projects
+
+---
+
+## Pull Request and Merge Workflow
+
+### Creating Pull Requests
+
+When creating pull requests for branch merges:
+
+**Preparation**:
+1. Ensure all changes are committed and pushed to remote
+2. Review commits that will be included in PR
+3. Check that gh CLI is installed and authenticated
+4. Verify branch is ready to merge (no conflicts, tests passing)
+
+**PR Title Format**:
+- Use user's commit format: `~ [ short up to 8 word summary ]:`
+- Focus on overall changes, not individual commits
+- Example: `~ [ add project discovery and prompt system ]:`
+
+**PR Description Guidelines**:
+- Summarize overall changes (not individual commits)
+- Group related changes together
+- Mention any breaking changes or migration steps
+- Link to relevant issues or documentation
+- Explain impact and reasoning
+
+**Creating PR**:
+Use `gh pr create` command:
+
+```bash
+gh pr create --title "~ [ short up to 8 word summary ]:" --body "PR description here"
+```
+
+**Prompt for Creating PR**:
+- Use `#create_pr#` prompt for systematic PR creation
+- Placeholder: `{pr_description}` - Description of PR being created
+
+### Merging Pull Requests
+
+**Before Merging**:
+1. Review all changes in PR
+2. Ensure CI/CD checks pass
+3. Check that no merge conflicts exist
+4. Verify tests pass on merge
+5. Review breaking changes and migration steps
+
+**Merge Methods**:
+- **Squash and Merge**: Clean history, single commit
+- **Rebase and Merge**: Preserve history, linear progression
+- **Merge Commit**: Preserve all commits, branch point
+
+**Merge Commits**:
+- Use user's commit format for merge commits
+- Example: `~ [ merge feature/branch-name ]:`
+- Document what was merged and why
 
 ---
 
@@ -706,3 +919,5 @@ Follow the enhanced conventional commit format defined in [`docs/memory/git_comm
 - [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) - AI tool registry
 - [`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md) - Git commit message format
 - [`docs/memory/README.md`](docs/memory/README.md) - Shared memory system documentation
+- [`docs/common_prompts.md`](docs/common_prompts.md) - Prompt reference system and reusable templates
+
