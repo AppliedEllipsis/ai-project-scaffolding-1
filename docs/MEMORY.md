@@ -39,6 +39,23 @@ This file maintains query history and tracks ongoing work across AI agent sessio
 - Confirmed all files committed using enhanced conventional commit format
 - Verified clean git status with working tree clean
 
+### [2026-02-01 02:36 UTC] - Query: Update memory with prompt system refinements
+
+**Query**: Update memory about prompt system to use `~` instead of `!` for prompts, make agents optimized for detecting prompt requests
+
+**Context**: Found that `!` is a shell command operator in opencode, so need to use `~` instead. Should have agents.min.md and AGENTS.md always check prompts for updates when user asks to update memory or use update_from_project. Looking for general matching prompts instead of exact matches.
+
+**Outcome**: Completed
+- Updated docs/common_prompts.md with comprehensive prompt reference system documentation
+- Clarified to use `~` instead of `!` for prompt names (avoid shell conflicts)
+- Updated AGENTS.md Prompt Reference System section with better detection logic
+- Updated agents.min.md to be optimized for prompt detection
+- Added general/fuzzy matching guidelines (not exact string matching)
+- Documented that agents should always check for ~ patterns that look like prompt requests
+- Distinguished prompt references from inline code or comments
+- Added context-aware matching guidelines
+- Updated all documentation to reference docs/common_prompts.md
+
 ---
 
 ## Current Focus

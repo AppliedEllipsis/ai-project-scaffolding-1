@@ -384,7 +384,19 @@ The `docs/common_prompts.md` file provides reusable prompt patterns:
 - Quick access to common workflows
 - Extensible prompt library (updated manually or by AI)
 - Use `{placeholder_name}` for dynamic content
-- Add `!name` prefix for named templates
+- Add `~name` prefix for named templates (not `!` - it's a shell operator)
+
+**Important**: Always check docs/common_prompts.md when user:
+- Asks to "update memory" or "learn from project"
+- Uses patterns like "~update_from_project#" or similar
+- Requests updates or learning from other projects
+
+**Detection Logic**:
+- Look for ~ patterns that look like prompt requests (not inline code or comments)
+- Distinguish from user's shell commands (e.g., in opencode)
+- General matching based on intent, not exact strings
+- "update" + "memory/project" matches #update_from_project#
+- Context-aware matching considering user's tool and request
 
 **Example**:
 ```markdown
@@ -396,6 +408,8 @@ look into {path provided} for project memory updates...
 - Discover a workflow to repeat
 - Learn a new pattern from other projects
 - Create a reusable template for common tasks
+- Always use `~` not `!` for prompt names
+- Document matching guidelines (when/how the prompt is detected)
 
 ---
 

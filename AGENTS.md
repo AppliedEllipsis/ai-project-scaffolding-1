@@ -397,8 +397,11 @@ Prompts in `docs/common_prompts.md` follow this structure:
 
 **Placeholder Usage**:
 - Use `{placeholder_name}` for dynamic content
-- Prompts with `!name` should be treated as named templates
+- Prompts with `~name` should be treated as named templates
 - Replace placeholders with actual values when executing prompts
+- **Important**: Use `~` (tilde) instead of `!` for prompt names
+- `!` is a shell command operator in some tools (e.g., opencode)
+- This prevents conflicts with shell commands and comments
 
 **Reading Prompts**:
 
@@ -408,9 +411,20 @@ Prompts in `docs/common_prompts.md` follow this structure:
    - Reference prompts when encountering matching scenarios
 
 2. **When Appropriate**:
-   - Use `#update_from_project#` when learning from other projects
+   - Check docs/common_prompts.md for general prompt matches
+   - Look for intent/context, not exact string matches
+   - Use fuzzy matching to find relevant prompts
+   - Distinguish from inline code or comments
    - Apply prompt patterns to consistent workflows
    - Reference named prompts for complex tasks
+
+3. **Prompt Detection Logic**:
+   - Check for `~` patterns that look like prompt requests (not inline code or comments)
+   - Distinguish between user's shell commands and prompt references
+   - Match based on intent: "update memory", "update from project", etc.
+   - Consider context and tool when matching
+   - If no specific match found, proceed with standard workflow
+   - Always check for ~ patterns when user asks to update memory or learn from projects
 
 **Updating Prompts**:
 
@@ -418,13 +432,24 @@ Prompts in `docs/common_prompts.md` follow this structure:
 - Add new prompt patterns as you discover useful workflows
 - Document prompts that work well for specific tasks
 - Include placeholders for dynamic content
-- Add `!name` prefix for named prompts
+- Add `~name` prefix for named prompts (not `!` to avoid shell conflicts)
+- Document when to use and matching logic
+- Make matching flexible/general, not strict/exact
 
 **AI-Agent Updates**:
 - AI agents can add new prompts based on learned patterns
 - Document successful workflows as reusable prompts
 - Include context and usage examples
 - Maintain clear naming conventions
+- Update matching guidelines as you learn
+
+**Important Note**:
+- Always use `~` instead of `!` for prompt names
+- `!` is a shell command operator in some tools (e.g., opencode)
+- This prevents conflicts with shell commands and comments
+- Agents should always check docs/common_prompts.md for prompt requests
+- Look for general matching, not necessarily exact string matches
+- Distinguish prompt references from code comments or inline explanations
 
 **Example Prompts**:
 
@@ -442,15 +467,17 @@ look into {path provided} for project memory updates that we might add to best p
 **Prompt Management**:
 - Read `docs/common_prompts.md` during onboarding
 - Keep prompts focused and reusable
-- Use descriptive names with `!name` prefix
+- Use descriptive names with `~` prefix
 - Document placeholders clearly
 - Update prompts based on feedback and usage
+- Make matching flexible/general, not strict/exact
 
 **Integration with Memory System**:
 - Prompt additions should be documented in docs/MEMORY.md
 - Update Quick Reference section with new prompt patterns
 - Reference prompts in AGENTS.md for context
 - Share prompt knowledge via docs/memory/shared-memory.md
+- Always check docs/common_prompts.md when user requests updates or learning
 
 ---
 
