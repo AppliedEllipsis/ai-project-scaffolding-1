@@ -24,7 +24,7 @@ Prompts follow this structure:
 
 ### #update_from_project#
 
-look into {path provided} for project memory updates that we might add to best practices. enhance yourself based off non-project specific best practices and document and memorize, and implement it. {}
+look into {path provided} for project memory updates that we might add to best practices. enhance yourself based off non-project specific best practices and document and memorize, and implement it.
 
 **Use when**:
 
