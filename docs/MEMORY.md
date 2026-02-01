@@ -91,6 +91,7 @@ No sub-tasks pending.
 | [`AGENTS.md`](AGENTS.md) | Full development guide |
 | [`docs/memory/shared-memory.md`](docs/memory/shared-memory.md) | Cross-tool context and tasks |
 | [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) | AI tool registry |
+| [`docs/common_prompts.md`](docs/common_prompts.md) | Prompt reference system and reusable templates |
 | [`docs/MEMORY.md`](docs/MEMORY.md) | This file - query history |
 | [`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md) | Commit message format |
 | [`package.json`](package.json) | NPM scripts and dependencies |
@@ -121,7 +122,8 @@ npm run buildrelease  # Build release
 1. `agents.min.md` - Quick start
 2. `docs/memory/shared-memory.md` - Cross-tool context
 3. `docs/MEMORY.md` - Query history
-4. `docs/memory/tool-registry.md` - Tool info
+4. `docs/common_prompts.md` - Prompt reference system
+5. `docs/memory/tool-registry.md` - Tool info
 
 **Update when**:
 - Starting new query session

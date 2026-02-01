@@ -9,6 +9,9 @@ This guide provides comprehensive instructions for AI agents working on projects
   - [When to Update MEMORY.md](#when-to-update-memorymd)
   - [Query Documentation Guidelines](#query-documentation-guidelines)
   - [Release and Changelog Workflow](#release-and-changelog-workflow)
+- [Project Discovery and Learning](#project-discovery-and-learning)
+  - [Reading Other Projects](#reading-other-projects)
+  - [Prompt Reference System](#prompt-reference-system)
 - [Incremental Development Approach](#incremental-development-approach)
 - [Documentation Practices](#documentation-practices)
 - [Coding Practices](#coding-practices)
@@ -293,6 +296,7 @@ npm run buildrelease # Full release workflow
 2. `docs/memory/shared-memory.md` - Cross-tool context
 3. `docs/MEMORY.md` - Query history
 4. `docs/memory/tool-registry.md` - Tool info
+5. `docs/common_prompts.md` - Prompt reference system
 
 **Update when**:
 - Starting new query session
@@ -321,6 +325,132 @@ npm run buildrelease # Full release workflow
 3. Mark completed sub-tasks
 4. Document new patterns
 5. Report completion
+
+---
+
+## Project Discovery and Learning
+
+### Reading Other Projects
+
+When discovering and learning from other projects:
+
+**Purpose**:
+- Extract best practices from existing projects
+- Learn new workflows and methodologies
+- Improve the scaffolding template
+- Enhance development standards
+
+**Discovery Process**:
+
+1. **Initial Scan**:
+   - List project directory structure
+   - Identify documentation files (`*.md`, `docs/`, `plans/`)
+   - Find memory systems and agent guides
+   - Locate configuration files (package.json, .vscodeignore, etc.)
+
+2. **Documentation Reading Strategy**:
+   - Read agent guides first (AGENTS.md, agents.min.md)
+   - Read memory files to understand project context
+   - Review README.md for project overview
+   - Check for CHANGELOG.md and release practices
+   - Examine scripts/ for automation patterns
+
+3. **Best Practice Extraction**:
+   - Identify unique workflows or processes
+   - Note tool configurations and patterns
+   - Document release and deployment practices
+   - Extract testing and quality assurance methods
+   - Learn documentation organization standards
+
+4. **Filtering for Scaffolding**:
+   - Remove project-specific details
+   - Keep universal best practices
+   - Adapt patterns to generic use
+   - Document rationale for inclusion
+
+**Key Areas to Examine**:
+- Memory system implementations
+- Release workflows and automation
+- Git practices and commit formats
+- Documentation structure
+- Configuration management
+- Testing strategies
+- Security practices
+
+### Prompt Reference System
+
+**Purpose**:
+The [`docs/common_prompts.md`](docs/common_prompts.md) file provides a centralized repository of reusable prompt patterns and templates. This system allows:
+- Consistent prompt usage across sessions
+- Quick access to common workflows
+- Knowledge of available prompts for future reference
+- Extensible prompt library (updated manually or by AI)
+
+**Prompt Format**:
+
+Prompts in `docs/common_prompts.md` follow this structure:
+
+```markdown
+#prompt_name#
+{prompt description with placeholders}
+```
+
+**Placeholder Usage**:
+- Use `{placeholder_name}` for dynamic content
+- Prompts with `!name` should be treated as named templates
+- Replace placeholders with actual values when executing prompts
+
+**Reading Prompts**:
+
+1. **During Onboarding**:
+   - Read `docs/common_prompts.md` as part of initial context loading
+   - Store available prompt patterns in working memory
+   - Reference prompts when encountering matching scenarios
+
+2. **When Appropriate**:
+   - Use `#update_from_project#` when learning from other projects
+   - Apply prompt patterns to consistent workflows
+   - Reference named prompts for complex tasks
+
+**Updating Prompts**:
+
+**Manual Updates**:
+- Add new prompt patterns as you discover useful workflows
+- Document prompts that work well for specific tasks
+- Include placeholders for dynamic content
+- Add `!name` prefix for named prompts
+
+**AI-Agent Updates**:
+- AI agents can add new prompts based on learned patterns
+- Document successful workflows as reusable prompts
+- Include context and usage examples
+- Maintain clear naming conventions
+
+**Example Prompts**:
+
+```markdown
+#update_from_project#
+look into {path provided} for project memory updates that we might add to best practices, I know it knows rules about gh and pr among other things... enhance yourself based off non-project specific best practices and document and memorize, and implement it.
+```
+
+**When to Add Prompts**:
+- Discover a workflow that would be useful to repeat
+- Learn a new pattern from another project
+- Create a reusable template for common tasks
+- Document best practices that should be standardized
+
+**Prompt Management**:
+- Read `docs/common_prompts.md` during onboarding
+- Keep prompts focused and reusable
+- Use descriptive names with `!name` prefix
+- Document placeholders clearly
+- Update prompts based on feedback and usage
+
+**Integration with Memory System**:
+- Prompt additions should be documented in docs/MEMORY.md
+- Update Quick Reference section with new prompt patterns
+- Reference prompts in AGENTS.md for context
+- Share prompt knowledge via docs/memory/shared-memory.md
 
 ---
 
@@ -706,3 +836,5 @@ Follow the enhanced conventional commit format defined in [`docs/memory/git_comm
 - [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) - AI tool registry
 - [`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md) - Git commit message format
 - [`docs/memory/README.md`](docs/memory/README.md) - Shared memory system documentation
+- [`docs/common_prompts.md`](docs/common_prompts.md) - Prompt reference system and reusable templates
+

@@ -52,6 +52,7 @@ npm run watch
 ├── commitlint.config.mjs # Commit message linting configuration
 ├── docs/
 │   ├── MEMORY.md         # Query history and task tracking
+│   ├── common_prompts.md  # Prompt reference system and reusable templates
 │   └── memory/
 │       ├── README.md                 # Shared memory system documentation
 │       ├── git_commit_format.md      # Git commit message format
@@ -300,7 +301,42 @@ See [`agents.min.md`](agents.min.md) for complete documentation.
 - **[`docs/memory/shared-memory.md`](docs/memory/shared-memory.md)** - Memory pool
 - **[`docs/memory/tool-registry.md`](docs/memory/tool-registry.md)** - Tool registry
 - **[`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md)** - Commit format
+- **[`docs/common_prompts.md`](docs/common_prompts.md)** - Prompt reference system and reusable templates
 - **[`CHANGELOG.md`](CHANGELOG.md)** - Released changes and version history
+
+---
+
+## Project Discovery and Learning
+
+The scaffolding includes a **prompt reference system** for learning from other projects:
+
+### Reading Other Projects
+
+When discovering and learning from other projects:
+
+1. **Initial Scan**: List project directory structure, identify documentation files
+2. **Documentation Reading**: Read agent guides, memory files, README.md, CHANGELOG.md
+3. **Best Practice Extraction**: Identify unique workflows, tool configurations, release practices
+4. **Filtering for Scaffolding**: Remove project-specific details, keep universal best practices
+
+### Prompt Reference System
+
+The `docs/common_prompts.md` file provides:
+
+- Reusable prompt patterns for consistent workflows
+- Quick access to common project discovery tasks
+- Extensible library (updated manually or by AI agents)
+
+**Example prompt**:
+```markdown
+#update_from_project#
+look into {path provided} for project memory updates...
+```
+
+When you discover workflows that should be repeated:
+- Add new prompt patterns to `docs/common_prompts.md`
+- Include `{placeholder_name}` for dynamic content
+- Use `!name` prefix for named templates
 
 ---
 
