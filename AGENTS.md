@@ -248,6 +248,7 @@ This provides factual documentation of what changed in each release.
 
 **Key Files**:
 - [`CHANGELOG.md`](CHANGELOG.md) - Released changes and version history
+- [`release-notes.md`](release-notes.md) - User-facing update messages
 - [`scripts/update-changelog-for-release.js`](scripts/update-changelog-for-release.js) - Automated changelog updater
 - [`scripts/update-memory-for-release.js`](scripts/update-memory-for-release.js) - Automated memory updater
 
@@ -917,6 +918,8 @@ Follow the enhanced conventional commit format defined in [`docs/memory/git_comm
 - [`agents.min.md`](agents.min.md) - Optimized quick-start guide
 - [`docs/memory/shared-memory.md`](docs/memory/shared-memory.md) - Main shared memory pool
 - [`docs/memory/tool-registry.md`](docs/memory/tool-registry.md) - AI tool registry
+- [`docs/memory/git_workflow_guide.md`](docs/memory/git_workflow_guide.md) - Git workflow and best practices
+- [`docs/memory/pull_request_guidelines.md`](docs/memory/pull_request_guidelines.md) - PR creation and review guidelines
 - [`docs/memory/git_commit_format.md`](docs/memory/git_commit_format.md) - Git commit message format
 - [`docs/memory/README.md`](docs/memory/README.md) - Shared memory system documentation
 - [`docs/common_prompts.md`](docs/common_prompts.md) - Prompt reference system and reusable templates

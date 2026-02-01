@@ -14,10 +14,12 @@ The shared memory system provides:
 
 | File | Purpose | Read By | Write By |
 |------|---------|-----------|-----------|
-| [`shared-memory.md`](shared-memory.md) | Main shared memory pool | All tools | All tools |
-| [`tool-registry.md`](tool-registry.md) | Registry of AI tools and their memory systems | All tools | Tools discovering or updating registry |
-| [`git_commit_format.md`](git_commit_format.md) | Git commit message format specification | All tools | Opencode (maintainer) |
-| [`README.md`](README.md) | This file - documentation for shared memory system | All tools | Opencode (maintainer) |
+ | [`shared-memory.md`](shared-memory.md) | Main shared memory pool | All tools | All tools |
+ | [`tool-registry.md`](tool-registry.md) | Registry of AI tools and their memory systems | All tools | Tools discovering or updating registry |
+ | [`git_commit_format.md`](git_commit_format.md) | Git commit message format specification | All tools | Opencode (maintainer) |
+ | [`git_workflow_guide.md`](git_workflow_guide.md) | Git workflow & best practices | All tools | Opencode (maintainer) |
+ | [`pull_request_guidelines.md`](pull_request_guidelines.md) | PR creation & review guidelines | All tools | Opencode (maintainer) |
+ | [`README.md`](README.md) | This file - documentation for shared memory system | All tools | Opencode (maintainer) |
 
 ## Usage by AI Tools
 
@@ -299,3 +301,6 @@ If a tool is no longer used:
 - [`docs/MEMORY.md`](../MEMORY.md) - Query Memory & Task Tracking
 - [`shared-memory.md`](shared-memory.md) - Main shared memory pool
 - [`tool-registry.md`](tool-registry.md) - AI tool registry and capabilities
+- [`git_commit_format.md`](git_commit_format.md) - Git commit message format
+- [`git_workflow_guide.md`](git_workflow_guide.md) - Git workflow and best practices
+- [`pull_request_guidelines.md`](pull_request_guidelines.md) - PR creation and review guidelines

@@ -80,6 +80,124 @@ look into {path provided} for project memory updates that we might add to best p
 - User requests like "update from project" should trigger prompts
 - Consider user's specific tool and context when matching
 
+#### Extended Matching Examples
+
+**Example 1**: User asks to learn from another project
+```
+User: "Update memory based on what I learned from z-ai-monitor project"
+
+Agent Action:
+1. Check docs/common_prompts.md for matching prompts
+2. Match found: #update_from_project# (intent: "update" + "project")
+3. Execute prompt with placeholder: {path provided} = "z-ai-monitor"
+4. Process: Analyze project structure, extract best practices, update documentation
+```
+
+**Example 2**: User creates PR explicitly
+```
+User: "~create_pr# Merge feature/authentication into main"
+
+Agent Action:
+1. Recognize explicit prompt reference
+2. Parse: prompt = "create_pr", target_branch = "main", pr_description provided separately
+3. Execute #create_pr# with parsed parameters
+4. Process: Create PR using gh CLI with user's commit format
+```
+
+**Example 3**: General memory update (no specific prompt)
+```
+User: "Update memory with what we just did"
+
+Agent Action:
+1. Check docs/common_prompts.md for matching prompts
+2. No specific match found (general "update memory" request)
+3. Proceed with standard memory update workflow
+4. Update docs/MEMORY.md and docs/memory/shared-memory.md with session summary
+```
+
+#### Advanced Matching Scenarios
+
+**Scenario 1**: Multiple prompt patterns match
+- User says: "Create PR to merge feature and update memory from project X"
+- Action: Execute both prompts in order (#create_pr# first, then #update_from_project#)
+
+**Scenario 2**: Implicit prompt reference
+- User says: "I want to use that update project prompt you have"
+- Action: Recognize intent, match #update_from_project#, ask for path parameter
+
+**Scenario 3**: Complex request with multiple goals
+- User says: "Learn from project Y, then create PR for changes"
+- Action: Execute #update_from_project# first, then offer to create PR after changes are ready
+
+---
+
+## Fuzzy Matching Guidelines
+
+### What is Fuzzy Matching?
+
+Fuzzy matching allows agents to recognize prompt intent even when:
+- User uses different wording than the exact prompt name
+- User combines multiple concepts in one request
+- User's intent aligns with a known workflow
+- User refers to prompt indirectly (e.g., "that update project prompt")
+
+### Fuzzy Matching Rules
+
+**Apply fuzzy matching when**:
+- User request contains key trigger words (update, create, document, learn, enhance)
+- Intent aligns with documented workflow patterns
+- User's goal matches a prompt's purpose, even if wording differs
+- No specific task or exact command is requested
+
+**Do NOT apply fuzzy matching when**:
+- Clear, specific task is requested (e.g., "refactor function X in file Y")
+- User asks a direct question requiring reasoning
+- Request is ambiguous and needs clarification
+- User explicitly declines to use prompt workflows
+
+### Fuzzy Matching Examples
+
+**Example 1**: Wording variation
+```
+User: "Teach me what you know from z-ai-monitor project"
+
+Match: #update_from_project# (intent: learn from project, not exact wording)
+Action: Execute learning workflow
+```
+
+**Example 2**: Combined intent
+```
+User: "Open a PR for my feature branch"
+
+Match: #create_pr# (intent: create pull request, not exact "create a pr")
+Action: Offer PR creation workflow
+```
+
+**Example 3**: Indirect reference
+```
+User: "Use the enhancement prompt for this scaffolding"
+
+Match: #update_from_project# (intent: enhance based on other project)
+Action: Ask for project path to analyze
+```
+
+### Confidence Thresholds
+
+**High Confidence (Execute immediately)**:
+- Clear intent match with minor wording variation
+- User mentions specific prompt features by name or purpose
+- Request contains all required parameters
+
+**Medium Confidence (Ask for clarification)**:
+- Intent matches but parameters are missing
+- Multiple prompts could apply
+- Wording is ambiguous
+
+**Low Confidence (Do not match)**:
+- Vague request without clear workflow intent
+- User asks for help or information, not a workflow
+- Request requires significant interpretation
+
 ---
 
 ## Integration with Memory System
